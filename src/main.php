@@ -1,7 +1,6 @@
-#!/usr/bin/env php
 <?php
 error_reporting(0);
-require_once "main.class.php";
+require_once 'phar://main.phar/class.php';
 if(strtolower(substr(PHP_OS, 0, 3)) == 'win') { // windows < 10 does't support color on terminal :'(
 	$R  = "";
 	$RR = "";
@@ -24,6 +23,25 @@ if(strtolower(substr(PHP_OS, 0, 3)) == 'win') { // windows < 10 does't support c
 	$X  = "\e[0m";
 	system("clear");
 }
+
+function loading($time) {
+	echo "\rLoading |\r";
+	usleep($time);
+	echo "\rlOading /\r";
+	usleep($time);
+	echo "\rloAding -\r";
+	usleep($time);
+	echo "\rloaDing \\"."\r";
+	usleep($time);
+	echo "\rloadIng |\r";
+	usleep($time);
+	echo "\rloadiNg /\r";
+	usleep($time);
+	echo "\rloadinG -\r";
+	usleep($time);
+	echo "\rloading \\"."\r";
+}
+
 echo $Y.
 " ___         _        ___        _           
 |_ _|_ _  __| |_ __ _| _ \___ __| |_ ___ _ _ 
@@ -123,6 +141,7 @@ $caption=readline("[#] Caption : "); // use '\n' for newline
 if(isset($vo)) {
 	for($x=0;$x<=count($username);$x++) {
 		echo $Y."[!] Please wait a moment [!]$X\n";
+		loading(100000);
 		$ig=new InstagramUpload();
 		$ig->Login($username[$x],$password[$x]);
 		$ig->UploadVideo($path,false,"$caption");
@@ -132,6 +151,7 @@ if(isset($vo)) {
 else {
 	for($x=0;$x<=count($username);$x++) {
 		echo $Y."[!] Please wait a moment [!]$X\n";
+		loading(100000);
 		$ig=new InstagramUpload();
 		$ig->Login($username[$x],$password[$x]);
 		$ig->UploadPhoto($path,"$caption");
